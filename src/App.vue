@@ -29,13 +29,35 @@ onMounted(async () => {
 setInterval(() => {
   now.value = Date.now()
 }, 1000)
+const drawer = ref(false)
 </script>
 
 <template>
-  <div :key="now">
-    <timer-item timer-title="Eating junk food" />
-    <timer-item color="red" timer-title="Sleeping" />
-  </div>
+  <v-app>
+    <v-app-bar :elevation="3">
+      <v-app-bar-nav-icon
+        variant="text"
+        @click.stop="drawer = !drawer"
+      ></v-app-bar-nav-icon>
+      <v-toolbar-title>Arekara</v-toolbar-title>
+    </v-app-bar>
+
+    <v-navigation-drawer v-model="drawer">a</v-navigation-drawer>
+    <v-main>
+      <v-container>
+        <div :key="now">
+          <timer-item timer-title="Eating junk food" />
+          <timer-item color="red" timer-title="Sleeping" />
+        </div>
+
+        <v-btn
+          icon="mdi-plus"
+          color="primary"
+          style="position: fixed; bottom: 36px; right: 36px"
+        ></v-btn>
+      </v-container>
+    </v-main>
+  </v-app>
 </template>
 
 <style scoped></style>

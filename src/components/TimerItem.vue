@@ -1,10 +1,13 @@
 <template>
-  <section class="flex justify-between items-center px-4 py-2 border-b">
-    <div :class="colorClass" class="text-gray-200 px-2 py-1 rounded">
-      {{ timeSinceTimerSet }}
-    </div>
-    <div>{{ timerTitle }}</div>
-  </section>
+  <v-card :elevation="1" class="mb-4">
+    <template v-slot:title>
+      <section class="tw-flex tw-justify-between tw-items-center">
+        {{ timerTitle }}
+
+        <v-chip :color="color">{{ timeSinceTimerSet }}</v-chip>
+      </section>
+    </template>
+  </v-card>
 </template>
 <script setup lang="ts">
 import { computed } from 'vue'
@@ -38,19 +41,5 @@ const timeSinceTimerSet = computed(() => {
   return `${padInTwoZeros(hours.toString())}:${padInTwoZeros(
     minutes.toString()
   )}:${padInTwoZeros(seconds.toString())}`
-})
-
-// To support Tailwind JIT, we need to explictly
-// declare the classes so that when it reads this
-// file, it knows that we need these classes.
-const colorClass = computed(() => {
-  switch (props.color) {
-    case 'blue':
-      return 'bg-blue-400'
-    case 'red':
-      return 'bg-red-400'
-    default:
-      return 'bg-blue-400'
-  }
 })
 </script>

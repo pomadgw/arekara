@@ -18,7 +18,8 @@
     "src/**/*.d.ts",
     "src/**/*.tsx",
     "src/**/*.vue",
-    ".eslintrc.cjs"
+    ".eslintrc.cjs",
+    "tailwind.config.cjs"
   ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
