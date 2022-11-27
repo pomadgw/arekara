@@ -1,0 +1,2 @@
+// Why Stylelint wnat to check a Common JS file? I don't know
+*.cjs
