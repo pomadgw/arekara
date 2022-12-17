@@ -10,7 +10,7 @@ export class ArekaraIndexedDB extends Dexie {
     super('ArekaraDB')
     this.version(1).stores({
       timers:
-        '++id,title,reset_counter,last_reseted_at,*reset_history,*categories'
+        '++id,title,reset_counter,last_reseted_at,color,*reset_history,*categories'
     })
   }
 }
