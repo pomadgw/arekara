@@ -4,4 +4,5 @@ export interface Timer {
   reset_counter: number
   last_reseted_at: string
   categories: string[]
+  reset_history: string[]
 }
