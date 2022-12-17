@@ -42,7 +42,7 @@ const drawer = ref(false)
       <v-toolbar-title>Arekara</v-toolbar-title>
     </v-app-bar>
 
-    <v-navigation-drawer v-model="drawer">a</v-navigation-drawer>
+    <!-- <v-navigation-drawer v-model="drawer">a</v-navigation-drawer> -->
     <v-main>
       <v-container>
         <div :key="now">
