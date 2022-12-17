@@ -15,7 +15,7 @@ export class Timers extends Dexie {
   timers!: Table<Timer>
 
   constructor() {
-    super('myDatabase')
+    super('ArekaraDB')
     this.version(1).stores({
       timers: '++id,title,reset_counter,last_reseted_at,*categories'
     })
