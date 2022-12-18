@@ -31,6 +31,12 @@ export async function getTimers(): Promise<Timer[]> {
   return await db.timers.toArray()
 }
 
+export async function getTimer(key: number): Promise<Timer | undefined> {
+  const db = getDatabaseInstance()
+
+  return await db.timers.get(key)
+}
+
 export async function createTimer(data: Timer): Promise<Timer> {
   const index = await getDatabaseInstance().timers.add(data)
 
@@ -41,4 +47,26 @@ export async function createTimer(data: Timer): Promise<Timer> {
   }
 
   return result
+}
+
+export async function resetTimer(key: number): Promise<Timer | undefined> {
+  const data = await getTimer(key)
+
+  if (data != null) {
+    const lastReseted = data.last_reseted_at
+    data.reset_history.push(lastReseted)
+    data.reset_counter += 1
+    data.last_reseted_at = new Date().toISOString()
+
+    const numbeOfUpdatedData = await getDatabaseInstance().timers.update(
+      key,
+      data
+    )
+
+    if (numbeOfUpdatedData === 0) {
+      throw new Error(`Data with key ${key} is not updated`)
+    }
+
+    return data
+  }
 }
