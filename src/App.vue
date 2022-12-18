@@ -1,11 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import TimerItem from './components/TimerItem.vue'
-import { useDb } from './stores/db'
+import { getTimers, createTimer } from './services/dexie'
 import { Timer } from './db'
 
 const now = ref(Date.now())
-const db = useDb()
 const drawer = ref(false)
 const showAddDialog = ref(false)
 
@@ -35,7 +34,7 @@ onMounted(async () => {
 })
 
 const loadTimers = async () => {
-  const myTimers = await db.timers.toArray()
+  const myTimers = await getTimers()
   timers.value = myTimers
 }
 
@@ -46,7 +45,7 @@ const openCreateNewTimerDialog = () => {
 
 const saveNewTimer = async () => {
   try {
-    await db.timers.add({
+    await createTimer({
       title: newTitle.value,
       last_reseted_at: new Date().toISOString(),
       reset_counter: 0,

@@ -24,3 +24,21 @@ export function getDatabaseInstance(): ArekaraIndexedDB {
 
   return db
 }
+
+export async function getTimers(): Promise<Timer[]> {
+  const db = getDatabaseInstance()
+
+  return await db.timers.toArray()
+}
+
+export async function createTimer(data: Timer): Promise<Timer> {
+  const index = await getDatabaseInstance().timers.add(data)
+
+  const result = await getDatabaseInstance().timers.get(index)
+
+  if (result == null) {
+    throw new Error('The data was somehow not inserted!')
+  }
+
+  return result
+}
